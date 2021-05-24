@@ -1,4 +1,5 @@
 data "google_compute_image" "debian" {
+  project = "debian-cloud"
   family  = "debian-9"
 }
 
@@ -26,7 +27,7 @@ resource "google_compute_instance" "vm" {
 }
 
 data "template_file" "nginx" {
-  template = "${file("${path.module}/template/install_nginx.tpl")}"
+  template = file("install_nginx.tpl")
 
   vars = {
     ufw_allow_nginx = "Nginx HTTP"
